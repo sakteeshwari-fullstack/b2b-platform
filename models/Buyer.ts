@@ -1,6 +1,4 @@
-// ✅ Mongoose Model: /models/Buyer.ts
-// ==============================
-
+// models/Buyer.ts
 import mongoose from 'mongoose';
 
 const BuyerSchema = new mongoose.Schema({
@@ -9,10 +7,12 @@ const BuyerSchema = new mongoose.Schema({
   password: { type: String, required: true },
   phoneNumber: { type: String, required: true },
   companyName: { type: String, required: true },
-  gstin: { type: String },
+  role: {
+    type: String,
+    enum: ['Retailer', 'Wholesaler', 'Distributor', 'Agent'],
+    required: true,
+  },
   agreedToTerms: { type: Boolean, required: true },
-  role: { type: String, default: 'buyer' },
 }, { timestamps: true });
 
 export default mongoose.models.Buyer || mongoose.model('Buyer', BuyerSchema);
-
